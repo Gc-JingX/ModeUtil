@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
@@ -102,6 +103,8 @@ public class TipDialog extends Dialog {
 
         private CharSequence mTipWord;
 
+        private int picId;
+
         public Builder(Context context) {
             mContext = context;
         }
@@ -121,6 +124,13 @@ public class TipDialog extends Dialog {
          */
         public Builder setTipWord(CharSequence tipWord) {
             mTipWord = tipWord;
+            return this;
+        }
+        /**
+         * 设置显示的图片
+         */
+        public Builder setImageDrawable(@DrawableRes int id) {
+            picId = id;
             return this;
         }
 
@@ -146,14 +156,14 @@ public class TipDialog extends Dialog {
                 ImageView imageView = new ImageView(mContext);
                 LinearLayout.LayoutParams imageViewLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 imageView.setLayoutParams(imageViewLP);
-
-                if (mCurrentIconType == ICON_TYPE_SUCCESS) {
-                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_done));
-                } else if (mCurrentIconType == ICON_TYPE_FAIL) {
-                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_error));
-                } else {
-                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_info));
-                }
+                imageView.setImageDrawable(ContextCompat.getDrawable(mContext,picId));
+//                if (mCurrentIconType == ICON_TYPE_SUCCESS) {
+//                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_done));
+//                } else if (mCurrentIconType == ICON_TYPE_FAIL) {
+//                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_error));
+//                } else {
+//                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_info));
+//                }
 
                 contentWrap.addView(imageView);
 

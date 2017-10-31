@@ -22,7 +22,13 @@ public class MainActivity extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//                if (mCurrentIconType == ICON_TYPE_SUCCESS) {
+//                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_done));
+//                } else if (mCurrentIconType == ICON_TYPE_FAIL) {
+//                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_error));
+//                } else {
+//                    imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.qmui_icon_notify_info));
+//                }
         findViewById(R.id.test_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,30 +38,35 @@ public class MainActivity extends MyActivity {
                     case 0:
                         tipDialog = new TipDialog.Builder(MainActivity.this)
                                 .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
+                                .setImageDrawable(R.mipmap.qmui_icon_notify_info)
                                 .setTipWord("正在加载")
                                 .create();
                         break;
                     case 1:
                         tipDialog = new TipDialog.Builder(MainActivity.this)
                                 .setIconType(TipDialog.Builder.ICON_TYPE_SUCCESS)
+                                .setImageDrawable(R.mipmap.qmui_icon_notify_done)
                                 .setTipWord("发送成功")
                                 .create();
                         break;
                     case 2:
                         tipDialog = new TipDialog.Builder(MainActivity.this)
                                 .setIconType(TipDialog.Builder.ICON_TYPE_FAIL)
+                                .setImageDrawable(R.mipmap.qmui_icon_notify_error)
                                 .setTipWord("发送失败")
                                 .create();
                         break;
                     case 3:
                         tipDialog = new TipDialog.Builder(MainActivity.this)
                                 .setIconType(TipDialog.Builder.ICON_TYPE_INFO)
+                                .setImageDrawable(R.mipmap.qmui_icon_notify_info)
                                 .setTipWord("请勿重复操作")
                                 .create();
                         break;
                     case 4:
                         tipDialog = new TipDialog.Builder(MainActivity.this)
                                 .setIconType(TipDialog.Builder.ICON_TYPE_SUCCESS)
+                                .setImageDrawable(R.mipmap.qmui_icon_notify_done)
                                 .create();
                         break;
                     case 5:
