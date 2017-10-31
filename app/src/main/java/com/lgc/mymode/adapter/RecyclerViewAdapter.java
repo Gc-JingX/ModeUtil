@@ -1,0 +1,92 @@
+package com.lgc.mymode.adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.lgc.mymode.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by dkzwm on 2017/6/1.
+ *
+ * @author dkzwm
+ */
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+    private LayoutInflater mInflater;
+    private Context mContext;
+    private List<String> mList = new ArrayList<>();
+
+    public RecyclerViewAdapter(Context context, LayoutInflater inflater) {
+        mContext = context;
+        mInflater = inflater;
+    }
+
+    public void updateData(List<String> list) {
+        mList.clear();
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void appendData(List<String> list) {
+        int size = mList.size();
+        mList.addAll(list);
+        notifyItemInserted(size);
+    }
+
+    @Override
+    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.layout_list_view_item, parent, false);
+        Log.i("xx", "onCreateViewHolder ....");
+        return new RecyclerViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+        holder.mTextView.setText(String.valueOf(position));
+        Log.e("xx", "onBindViewHolder ....");
+//        Glide.with(mContext).asBitmap().load(mList.get(position)).into(holder.mImageView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mList.size();
+    }
+
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        private TextView mTextView;
+        private ImageView mImageView;
+
+        public RecyclerViewHolder(View itemView) {
+            super(itemView);
+            Log.e("xx", "RecyclerViewHolder ....");
+            mImageView = (ImageView) itemView.findViewById(R.id.imageView_list_item);
+            mTextView = (TextView) itemView.findViewById(R.id.textView_list_item);
+            mTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+//                    Toast.makeText(v.getContext(), "Click:" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            mTextView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(v.getContext(), "LongClick:" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
+        }
+
+    }
+
+}

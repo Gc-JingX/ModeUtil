@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId "com.lgc.mymode"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            //加载默认混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //去除检查 错误提示
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:23.1.0'
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+
+
+    compile rootProject.ext.dependencies.design
+    compile rootProject.ext.dependencies.appCompat
+    compile rootProject.ext.dependencies.recyclerView
+    compile rootProject.ext.dependencies.support
+    compile rootProject.ext.dependencies.joooonho
+//    compile rootProject.ext.dependencies.glide
+//    annotationProcessor rootProject.ext.dependencies.compiler
+
+    compile rootProject.ext.dependencies.smoothRefreshLayout
+    compile rootProject.ext.dependencies.smoothRefreshLayouttwo
+    compile rootProject.ext.dependencies.smoothRefreshLayouthorizontal
+
+    //注解
+    compile(rootProject.ext.dependencies.butterknife) {
+        exclude group: 'com.android.support'
+    }
+    annotationProcessor rootProject.ext.dependencies.butterknifecompiler
+
+
+    compile project(':LgcUtilLibrary')
+}
